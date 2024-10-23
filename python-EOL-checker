@@ -1,0 +1,55 @@
+#!/bin/bash
+
+divider="======================================================"
+header="| EOL Python Version Dependency Check Results          |"
+printf "%s\n%s\n%s\n" "$divider" "$header" "$divider"
+
+check_python_versions() {
+    echo -e "\n[+] Installed EOL Python Versions:"
+    python_versions=$(find /usr/bin /bin /usr/local/bin -name "python*" 2>/dev/null | xargs -I {} {} --version 2>&1 | grep -E "Python (2\.|3\.[0-5]\.)")
+    if [ -z "$python_versions" ]; then
+        echo "| None found"
+    else
+        echo "$python_versions" | awk '{print "| " $0}'
+    fi
+}
+
+search_files_for_old_python() {
+    echo -e "\n[+] Files Referencing EOL Python Versions:"
+    old_python_files=$(grep -r -E "/usr/bin/python[23](\.[0-5])?" /etc /usr /var 2>/dev/null)
+    if [ -z "$old_python_files" ]; then
+        echo "| None found"
+    else
+        echo "$old_python_files" | awk '{print "| " $0}'
+    fi
+}
+
+check_running_processes() {
+    echo -e "\n[+] Running Processes Using EOL Python Versions:"
+    python_processes=$(ps aux | grep -E "python[23](\.[0-5])?" | grep -v grep)
+    if [ -z "$python_processes" ]; then
+        echo "| None found"
+    else
+        echo "$python_processes" | awk '{print "| " $0}'
+    fi
+}
+
+find_old_python_venvs() {
+    echo -e "\n[+] Virtual Environments Using EOL Python Versions:"
+    python_venvs=$(find / -name "python[23].[0-5]" 2>/dev/null)
+    if [ -z "$python_venvs" ]; then
+        echo "| None found"
+    else
+        echo "$python_venvs" | awk '{print "| " $0}'
+    fi
+}
+
+check_python_versions
+printf "%s\n" "$divider"
+search_files_for_old_python
+printf "%s\n" "$divider"
+check_running_processes
+printf "%s\n" "$divider"
+find_old_python_venvs
+printf "%s\n" "$divider"
+
