@@ -21,8 +21,11 @@ sudo ./python-EOL-checker
 What the Tool Does:
 
 -- Lists any EOL Python binaries found on your system.
+
 -- File References: Scans system files for explicit references to outdated Python binaries.
+
 -- Running Processes: Identifies currently running processes using EOL Python.
+
 -- Virtual Environments: Finds virtual environments using old Python versions.
 
 Requirements:
