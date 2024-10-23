@@ -5,17 +5,17 @@ A lightweight Bash tool that identifies dependencies on End-of-Life (EOL) Python
 Usage:
 
 Clone the Repository:
-bash
-Copy code
+
 git clone https://github.com/grimmtar/python-EOL-checker.git
+
 cd python-EOL-checker
+
 Make the Script Executable:
-bash
-Copy code
+
 chmod +x python-EOL-checker
+
 Run the Script:
-bash
-Copy code
+
 sudo ./python-EOL-checker
 
 What the Tool Does:
@@ -33,9 +33,10 @@ Root access (required to search system-wide directories and running processes)
 Troubleshooting:
 
 If a section shows "None found," it means the scan found no relevant results in that category.
+
 Make sure you run the script with sudo to allow access to all system directories.
 
-License
+License:
 
 This tool is licensed under the MIT License.
 
